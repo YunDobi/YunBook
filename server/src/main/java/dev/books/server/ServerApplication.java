@@ -17,11 +17,8 @@ public class ServerApplication {
 		return String.format("Hello %s!", name);
 	}
 
-	@PostMapping("/api/id")
-	public static void posting(@RequestBody String data) {
-//		have to return values
-	}
-
-//	@PutMapping("/api/id")
-//	@DeleteMapping()
+//	@PostMapping("/api/id")
+//	public static void posting(@RequestBody String data) {
+////		have to return values
+//	}
 }

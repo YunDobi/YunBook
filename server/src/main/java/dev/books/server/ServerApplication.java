@@ -12,16 +12,5 @@ public class ServerApplication {
 
 		SpringApplication.run(ServerApplication.class, args);
 	}
-	@GetMapping("/api")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
-	}
 
-	@PostMapping("/api/id")
-	public static void posting(@RequestBody String data) {
-//		have to return values
-	}
-
-//	@PutMapping("/api/id")
-//	@DeleteMapping()
 }

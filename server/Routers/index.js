@@ -3,8 +3,6 @@ const router = express.Router();
 const UserAPI = require('./Users');
 const BookAPI = require('./Books');
 
-//api + req will be show results.
-const API = 'https://www.googleapis.com/books/v1/volumes?q=';
 
 router.use('/user', UserAPI);
 router.use('/books', BookAPI);

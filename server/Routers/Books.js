@@ -2,12 +2,16 @@ const bodyParser = require('body-parser');
 const express = require("express");
 const request = require('request');
 const router = express.Router();
+const dotenv = require('dotenv');
 
-const API = 'https://www.googleapis.com/books/v1/volumes?q=';
+dotenv.config();
+
+//api + req will be show results.
+const API = process.env.API;
 
 router.get('/', (req,res) => {
   console.log(req.body);
-  request(API , (error, response, body) => {
+  request(process.env.API , (error, response, body) => {
     res.send(body);
   });
 });

@@ -1,0 +1,17 @@
+.bodyContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:  center;
+}
+
+.bodySearch {
+  position: absolute;
+  background-color: white;
+  width: 250px;
+  height: 150px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -29,7 +29,8 @@ export const Home = () => {
     <>
       <div className='bodyContent'>
         <div className='bodySearch'>
-          <form method='get' onSubmit={ReqHandler}>
+          <h2>Search your book now!</h2>
+          <form method='get' onSubmit={ReqHandler} style={{margin:"20px"}}>
             <input type='text' name='inputBody' onChange={handleChange} />
             <input type='submit' value='Search' />
           </form>

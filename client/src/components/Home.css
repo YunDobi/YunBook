@@ -1,4 +1,6 @@
+
 .bodyContent {
+  z-index: 11;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,11 +9,28 @@
 
 .bodySearch {
   position: absolute;
+  /* background-color: #C9EFC7; */
   background-color: white;
-  width: 250px;
-  height: 150px;
+  border-radius: 20px;
+  width: 600px;
+  height: 300px;
   margin: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.rightNavbar {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.Login.navSearch {
+  color: #C9EFC7;
+}
+.Login:hover {
+  cursor: pointer;
+}
+

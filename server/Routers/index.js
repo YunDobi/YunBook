@@ -4,7 +4,7 @@ const UserAPI = require('./Users');
 const BookAPI = require('./Books');
 
 
-router.use('/user', UserAPI);
+router.use('/users', UserAPI);
 router.use('/books', BookAPI);
 
 

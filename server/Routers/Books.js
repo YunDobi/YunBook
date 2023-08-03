@@ -12,13 +12,23 @@ const API = process.env.API;
 router.get('/', (req,res) => {
   console.log(req.body);
   request(process.env.API , (error, response, body) => {
-    res.send(body);
+    if (error) {
+      console.log(error);
+    } else {
+      res.send(body);
+    }
   });
 });
+
+
 router.post('/', (req,res) => {
-  console.log(req.body, req.headers.body);
+  console.log(API + req.body.query);
   request(API + req.body.query, (error, response, body) => {
-    res.send(body);
+    if (error) {
+      console.log(error);
+    } else {
+      res.send(body);
+    }
   });
 });
 

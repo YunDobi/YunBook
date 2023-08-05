@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../imges/logoB.png'
+import Logo from '../imges/logo-no.png'
 import axios from 'axios'
 
 

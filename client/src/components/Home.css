@@ -1,15 +1,27 @@
 
+
 .bodyContent {
   z-index: 11;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items:  center;
+  /* position: relative; */
+  /* background-image: url('../imges/background.svg'); */
+  /* height: 60vh; */
+}
+
+.bodyTop {
+  position: relative;
+    background-image: url('../imges/background.svg');
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .bodySearch {
-  position: absolute;
-  /* background-color: #C9EFC7; */
+  position: relative;
   background-color: white;
   border-radius: 20px;
   width: 600px;

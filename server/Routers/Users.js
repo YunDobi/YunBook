@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const CreatingUser = require('../Model/Users');
 
 const router = express.Router();
@@ -12,24 +13,31 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  console.log('posting', req.body);
-  let newUser = new CreatingUser({
-    email: req.body.email,
-    passowrd: req.body.passowrd,
-    name: 'temp',
-  });
+  bcrypt
+    .hash(req.body.password, 10)
+    .then((hashPassowrd) => {
+      const newUser = new CreatingUser({
+        email: req.body.email,
+        passowrd: hashPassowrd,
+        name: 'temp',
+      });
 
-  newUser
-    .save()
-    .then((doc) => {
-      res.send('sucessfully created new user!', doc);
+      newUser
+        .save()
+        .then((doc) => {
+          res.status(201).send({ message: 'User Created Successfully', doc });
+        })
+        .catch((error) => {
+          console.log(error);
+          res.status(500).send({ message: 'failed in mongodb' });
+        });
     })
-    .catch((error) => {
-      console.log(error);
-      res.status(500);
+    .catch((e) => {
+      console.log(e);
+      res.status(500).send({
+        message: 'Password was not hashed successfully',
+      });
     });
-
-  res.send('posting');
 });
 
 module.exports = router;

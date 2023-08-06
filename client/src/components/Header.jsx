@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../imges/ybook-logo.png';
 import './Home.css'
 import { useNavigate } from 'react-router-dom';
 
 
 export const Header = () => {
+  const [login, setLogin] = useState(false)
   const navigate = useNavigate()
 
   const LoginHandler = () => {
@@ -34,7 +35,11 @@ export const Header = () => {
       ></img>
       <div className='rightNavbar'>
         <div className='navSearch'>search</div>
-        <div className='Login' onClick={LoginHandler}>Login</div>
+        {login ? (
+          <div className='Login' onClick={LoginHandler}>Logout </div>
+        ): (
+          <div className='Login' onClick={LoginHandler}>Login</div>
+        )}
       </div>
     </div>
   );

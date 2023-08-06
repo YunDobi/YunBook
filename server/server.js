@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
   //---------creating the new user-------------
   // let userInfo = new CreatingUser({
   //   email: 'testing@gmail.com',
-  //   passowrd: '1234',
+  //   password: '1234',
   //   name: 'test',
   // });
   // userInfo

@@ -13,7 +13,7 @@
 
 .bodyTop {
   position: relative;
-    background-image: url('../imges/background.svg');
+  background-image: url('../imges/background.svg');
   height: 80vh;
   width: 100%;
   display: flex;

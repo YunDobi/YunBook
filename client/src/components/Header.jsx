@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../imges/ybook-logo.png';
 import './Home.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 export const Header = () => {
   const [login, setLogin] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setLogin(true)
+    }
+  }, [])
 
   const LoginHandler = () => {
     navigate('/login')

@@ -3,11 +3,13 @@ import backgroundImage from '../imges/background.svg';
 import axios from 'axios';
 import './Home.css';
 import { BookList } from './BookList';
+import { useLocation } from 'react-router-dom';
 
 export const Home = () => {
   const [login, setLogin] = useState(false);
   const [inputBody, setInputBody] = useState('');
   const [books, setBooks] = useState([]);
+  const location = useLocation();
 
   // const booksHandler = (books) => {
   //   console.log(books)
@@ -16,10 +18,22 @@ export const Home = () => {
   //   }
   // }
 
-  //for checking the users
-  // useEffect(() => {
-  //   booksHandler(books)
-  // }, [books])
+  // for checking the users
+  useEffect(() => {
+    // axios.defaults.headers.common['Authorization'] = `x_path ${localStorage.getItem('token')}`;
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(typeof user.token, user.token);
+    try {
+      axios
+        .get('/api/auth', { headers: { authorization: "Bearer " + user.token } })
+        .then((user) => {
+          console.log(user);
+        });
+      // setBooks(data.items);
+    } catch (error) {
+      console.log('error', error);
+    }
+  }, []);
 
   const handleChange = (event) => {
     setInputBody({ value: event.target.value });
@@ -51,6 +65,7 @@ export const Home = () => {
           </div>
         </div>
         <div>
+          {login ? <p>{location.state.email}</p> : <p></p>}
           <BookList books={books} />
         </div>
       </div>

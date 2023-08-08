@@ -17,7 +17,7 @@ router.post('/login', (req, res) => {
   //searching from the db
   CreatingUser.findOne({ email: req.body.email })
     .then((doc) => {
-      console.log(doc.password, req.body.password);
+      // console.log(doc.password, req.body.password);
       bcrypt
         .compare(req.body.password, doc.password)
         .then((passowrdCheck) => {
@@ -31,15 +31,17 @@ router.post('/login', (req, res) => {
               userId: doc._id,
               userEmail: doc.email,
             },
-            'Random Key',
+            "Random Key",
             {
-              expiresIn: '2m',
+              expiresIn: '120',
             }
           );
-
+          console.log(token);
           res
+            // .cookie("x_auth", token)
             .status(200)
             .send({ message: 'login sucess', email: doc.email, token });
+            
         })
         .catch((error) => {
           // console.log(error);
@@ -68,7 +70,7 @@ router.post('/register', (req, res) => {
           res.status(201).send({ message: 'User Created Successfully', doc });
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           res.status(500).send({ message: 'The email is already in the db' });
         });
     })

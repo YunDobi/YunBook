@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Logo from '../imges/ybook-logo.png';
-import './Home.css'
-import { useLocation, useNavigate } from 'react-router-dom';
+import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
-
-export const Header = ({status, setStatus}) => {
-  const navigate = useNavigate()
+export const Header = ({ status, setStatus }) => {
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setStatus(true)
+    if (localStorage.getItem('user')) {
+      setStatus(true);
     } else {
-      setStatus(false)
+      setStatus(false);
     }
-  }, [setStatus])
+  }, [setStatus]);
 
   const LoginHandler = () => {
-    navigate('/login')
-  }
+    navigate('/login');
+  };
 
   const logoHandler = () => {
-    navigate('/')
-  }
+    navigate('/');
+  };
 
   return (
     <div
@@ -43,9 +42,13 @@ export const Header = ({status, setStatus}) => {
       <div className='rightNavbar'>
         <div className='navSearch'>search</div>
         {status ? (
-          <div className='Login' onClick={LoginHandler}>Logout </div>
-        ): (
-          <div className='Login' onClick={LoginHandler}>Login</div>
+          <div className='Login' onClick={LoginHandler}>
+            Logout{' '}
+          </div>
+        ) : (
+          <div className='Login' onClick={LoginHandler}>
+            Login
+          </div>
         )}
       </div>
     </div>

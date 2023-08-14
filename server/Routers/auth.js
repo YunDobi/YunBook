@@ -10,7 +10,7 @@ module.exports = async (request, response, next) => {
     
     // retrieve the user details of the logged in user
     const user = await decodedToken;
-    console.log(user);
+    // console.log(user);
 
     // pass the user down to the endpoints here
     request.user = user;
@@ -19,9 +19,10 @@ module.exports = async (request, response, next) => {
     next();
     
   } catch (error) {
-    console.log(error)
-    response.status(401).json({
-      error: new Error("Invalid request!"),
-    });
+    console.log(error);
+    // response.status(401).send({message: "Auth system is worng!"});
+    response.status(403).json({ message: "Token is not valid" });
   }
 };
+
+//if can possible, send the 401 error and when the front side received the 401 and let it logout automatically. The homepage does not require to check the auth because avaiable to use auth. Or conditional situation such as if user is exisiting, then check the auth.

@@ -3,6 +3,7 @@ import Logo from '../imges/logo-no.png';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import axios from 'axios';
+import {Login as LoginCall} from '../services/auth.service';
 
 export const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -15,23 +16,23 @@ export const Login = () => {
 
     try {
       setLoading(true);
-      const requestion = axios.post('/api/users/login', {
-        email: email,
-        password: password,
-      });
-      const data = await requestion;
-      setLoading(false);
-      console.log('data', data.data);
-      //local storage insert
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ email: data.data.email, token: data.data.token })
-      );
-      alert(data.data.message, 'moving to the home!');
-      navigate('/');
+
+      // const requestion = axios.post('/api/users/login', {
+      //   email: email,
+      //   password: password,
+      // });
+      LoginCall(email, password)
+      .then((data) => {
+        setLoading(false);
+        console.log('data', data);
+        // alert(data.data.message, 'moving to the home!');
+        navigate('/');
+        window.location.reload()
+      })
+      // const data = await requestion;
     } catch (error) {
       console.error(error);
-      alert(error.response.data.message);
+      // alert(error.response.data.message);
     }
   };
 

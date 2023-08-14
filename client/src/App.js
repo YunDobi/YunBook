@@ -7,11 +7,15 @@ import { Footer } from './components/Footer';
 import { Login } from './components/Login';
 import './App.css';
 import { Register } from './components/Register';
+import { useState } from 'react';
 
 function App() {
+  const [login, setLogin] = useState(false);
+  console.log(login);
+
   return (
     <div className="App">
-      <Header />
+      <Header status={login} setStatus= {setLogin} />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />

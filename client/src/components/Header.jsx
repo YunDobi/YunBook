@@ -4,16 +4,16 @@ import './Home.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
-export const Header = () => {
-  const [login, setLogin] = useState(false)
+export const Header = ({status, setStatus}) => {
   const navigate = useNavigate()
-  const location = useLocation
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      setLogin(true)
+      setStatus(true)
+    } else {
+      setStatus(false)
     }
-  }, [])
+  }, [setStatus])
 
   const LoginHandler = () => {
     navigate('/login')
@@ -42,7 +42,7 @@ export const Header = () => {
       ></img>
       <div className='rightNavbar'>
         <div className='navSearch'>search</div>
-        {login ? (
+        {status ? (
           <div className='Login' onClick={LoginHandler}>Logout </div>
         ): (
           <div className='Login' onClick={LoginHandler}>Login</div>

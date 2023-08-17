@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export const SearchBar = ({inputbody, callback, page}) => {
+export const SearchBar = ({inputbody, callback}) => {
   const navigate = useNavigate()
 
   const handleChange = (event) => {
@@ -17,8 +17,7 @@ export const SearchBar = ({inputbody, callback, page}) => {
       const data = await res.data;
       console.log({ data });
       // setBooks(data.items);
-      page = 0
-      navigate('/search', { state:  {books: data.items, inputBody: inputbody, page: page}});
+      navigate('/search', { state:  {books: data.items, inputBody: inputbody}});
     } catch (error) {
       console.log('error', error);
     }

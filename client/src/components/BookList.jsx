@@ -86,7 +86,7 @@ export const BookList = () => {
                       display: 'flex',
                       flexDirection: 'row',
                       justifyContent: 'space-between',
-                      width: '867px',
+                      width: '1200px',
                     }}
                   >
                     {/* author */}

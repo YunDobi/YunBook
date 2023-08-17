@@ -5,11 +5,11 @@ import './Home.css';
 import { BookList } from './BookList';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Logout } from '../services/auth.service';
+import { SearchBar } from '../services/Helper';
 
 export const Home = () => {
   const [login, setLogin] = useState(false);
   const [inputBody, setInputBody] = useState('');
-  const [books, setBooks] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,9 +30,12 @@ export const Home = () => {
           .catch((error) => {
             console.log('error in axios');
             if (error.response.status === 403) {
-              console.log('axios error', error);
-              Logout()
-              window.location.reload()
+              console.log('token is Expired', error);
+              alert("Token Expired, please login in again")
+              Logout();
+              // window.location.reload();
+              navigate('/login', {state: {messge: "Token is expired"}})
+              //or navigate to the login
             }
           });
         // setBooks(data.items);
@@ -41,26 +44,6 @@ export const Home = () => {
       }
     }
   }, []);
-  // if(localStorage.getItem('user')) {
-  //   navigate(0)
-  // }
-
-  const handleChange = (event) => {
-    setInputBody({ value: event.target.value });
-  };
-
-  const ReqHandler = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await axios.post('/api/books', { query: inputBody.value });
-      const data = await res.data;
-      console.log({ data });
-      setBooks(data.items);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
 
   return (
     <>
@@ -68,15 +51,16 @@ export const Home = () => {
         <div className='bodyTop'>
           <div className='bodySearch'>
             <h2>Search your book now!</h2>
-            <form method='get' onSubmit={ReqHandler} style={{ margin: '20px' }}>
+            {/* <form method='get' onSubmit={ReqHandler} style={{ margin: '20px' }}>
               <input type='text' name='inputBody' onChange={handleChange} />
               <input type='submit' value='Search' />
-            </form>
+            </form> */}
+            <SearchBar inputbody={inputBody} callback={setInputBody} />
           </div>
         </div>
         <div>
           {login ? <p>{location.state.email}</p> : <p></p>}
-          <BookList books={books} />
+          {/* <BookList books={books} /> */}
         </div>
       </div>
     </>

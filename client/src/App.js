@@ -8,6 +8,7 @@ import { Login } from './components/Login';
 import './App.css';
 import { Register } from './components/Register';
 import { useState } from 'react';
+import { BookList } from './components/BookList';
 
 function App() {
   const [login, setLogin] = useState(false);
@@ -20,6 +21,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/search' element={<BookList />} />
       </Routes>
       <Footer />
     </div>

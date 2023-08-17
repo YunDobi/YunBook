@@ -22,6 +22,11 @@ export const Header = ({ status, setStatus }) => {
     navigate('/');
   };
 
+  const LogoutHandler = () => {
+    localStorage.removeItem('user');
+    navigate("/")
+  }
+
   return (
     <div
       style={{
@@ -40,14 +45,14 @@ export const Header = ({ status, setStatus }) => {
         onClick={logoHandler}
       ></img>
       <div className='rightNavbar'>
-        <div className='navSearch'>search</div>
+        <div className='navSearch'><h4>Search</h4></div>
         {status ? (
-          <div className='Login' onClick={LoginHandler}>
-            Logout{' '}
+          <div className='Logout' onClick={LogoutHandler}>
+            <h4>Logout{' '}</h4>
           </div>
         ) : (
           <div className='Login' onClick={LoginHandler}>
-            Login
+            <h4>Login</h4>
           </div>
         )}
       </div>

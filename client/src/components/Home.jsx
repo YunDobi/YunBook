@@ -9,7 +9,6 @@ import { Logout } from '../services/auth.service';
 export const Home = () => {
   const [login, setLogin] = useState(false);
   const [inputBody, setInputBody] = useState('');
-  const [books, setBooks] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -31,8 +30,9 @@ export const Home = () => {
             console.log('error in axios');
             if (error.response.status === 403) {
               console.log('axios error', error);
-              Logout()
-              window.location.reload()
+              Logout();
+              window.location.reload();
+              //or navigate to the login
             }
           });
         // setBooks(data.items);
@@ -41,9 +41,6 @@ export const Home = () => {
       }
     }
   }, []);
-  // if(localStorage.getItem('user')) {
-  //   navigate(0)
-  // }
 
   const handleChange = (event) => {
     setInputBody({ value: event.target.value });
@@ -56,7 +53,8 @@ export const Home = () => {
       const res = await axios.post('/api/books', { query: inputBody.value });
       const data = await res.data;
       console.log({ data });
-      setBooks(data.items);
+      // setBooks(data.items);
+      navigate('/search', { state: data.items });
     } catch (error) {
       console.log('error', error);
     }
@@ -76,7 +74,7 @@ export const Home = () => {
         </div>
         <div>
           {login ? <p>{location.state.email}</p> : <p></p>}
-          <BookList books={books} />
+          {/* <BookList books={books} /> */}
         </div>
       </div>
     </>

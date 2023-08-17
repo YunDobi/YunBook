@@ -1,45 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { SearchBar } from '../services/Helper';
 import logo from '../imges/ybook-logo.png';
+import axios from 'axios';
+import { Logout } from '../services/auth.service';
 // import axios from 'axios';
 // let page = 0;
 
 export const BookList = () => {
   const { state } = useLocation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [inputBody, setInputBody] = useState(state.inputBody);
 
   const books = state.books;
 
-  // console.log(page);
-  // console.log(inputBody, originalInput);
-  // if (inputBody.value !== originalInput.value) {
-  //   page = 0;
-  // }
-
-  // const ShowMore = async () => {
-  //   // console.log(inputBody, page);
-  //   page++;
-
-  //   try {
-  //     // inputBody value is right
-  //     const res = await axios.post('/api/books', {
-  //       query: `${inputBody.value}/${page}`,
-  //     });
-  //     const data = await res.data;
-  //     console.log(data);
-  //     // if (data.error) {
-  //     //   console.error(data.error)
-  //     // }
-  //     // setBooks(data.items);
-  //     navigate('/search', {
-  //       state: { books: data.items, inputBody: inputBody },
-  //     });
-  //   } catch (error) {
-  //     console.log('error', error);
-  //   }
-  // };
+  useEffect(() => {
+    // axios.defaults.headers.common['Authorization'] = `x_path ${localStorage.getItem('token')}`;
+    const user = JSON.parse(localStorage.getItem('user'));
+    // console.log(typeof user.token, user.token);
+    if (user) {
+      try {
+        axios
+          .get('/api/auth', {
+            headers: { authorization: 'Bearer ' + user.token },
+          })
+          .then((status) => {
+            console.log('axios work', status);
+          })
+          .catch((error) => {
+            console.log('error during the axios');
+            if (error.response.status === 403) {
+              console.log('Not Authirized yet!', error);
+              navigate('/login')
+            }
+          });
+        // setBooks(data.items);
+      } catch (error) {
+        console.log('error of axios request', error);
+      }
+    } else {
+      console.log("1")
+      navigate('/login', {state: {message: "not login yet"}})
+      // alert("not login Yet!")
+    }
+  }, []);
 
   if (!books) {
     return <p>empty</p>;

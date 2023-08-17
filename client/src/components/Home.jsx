@@ -30,9 +30,11 @@ export const Home = () => {
           .catch((error) => {
             console.log('error in axios');
             if (error.response.status === 403) {
-              console.log('axios error', error);
+              console.log('token is Expired', error);
+              alert("Token Expired, please login in again")
               Logout();
-              window.location.reload();
+              // window.location.reload();
+              navigate('/login', {state: {messge: "Token is expired"}})
               //or navigate to the login
             }
           });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../imges/logo-no.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Home.css';
 import axios from 'axios';
 import {Login as LoginCall} from '../services/auth.service';
@@ -8,7 +8,9 @@ import {Login as LoginCall} from '../services/auth.service';
 export const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const {state} = useLocation();
 
+  console.log(state)
   const submitLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -51,6 +53,8 @@ export const Login = () => {
         <br />
         <input type='submit' value='Login' />
       </form>
+
+      {state !== null ? <p style={{color: "red"}}>{state.message}</p> : null}
 
       <p style={{ color: 'white' }}>
         If you are not resgister yet,{' '}

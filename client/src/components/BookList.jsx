@@ -1,33 +1,80 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { SearchBar } from '../services/Helper';
+import logo from '../imges/ybook-logo.png';
+import axios from 'axios';
+let page = 0;
 
 export const BookList = () => {
+  const { state } = useLocation();
   const navigate = useNavigate();
-  const location = useLocation();
-  // console.log("books", books)
-  console.log(location.state);
+  const [inputBody, setInputBody] = useState(state.inputBody);
+  const originalInput = state.inputBody;
 
-  const books = location.state;
+  const books = state.books;
+
+  // console.log(page);
+  // console.log(inputBody, originalInput);
+  if (inputBody.value !== originalInput.value) {
+    page = 0;
+  }
+
+  const ShowMore = async () => {
+    // console.log(inputBody, page);
+    page++;
+
+    try {
+      // inputBody value is right
+      const res = await axios.post('/api/books', {
+        query: `${inputBody.value}/${page}`,
+      });
+      const data = await res.data;
+      console.log(data);
+      // if (data.error) {
+      //   console.error(data.error)
+      // }
+      // setBooks(data.items);
+      navigate('/search', {
+        state: { books: data.items, inputBody: inputBody },
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  if (!books) {
+    return <p>empty</p>;
+  }
 
   return (
     <div className='ResultContainer' style={{ margin: '30px' }}>
       <h3>result</h3>
-      <form method='get' style={{ margin: '20px' }}>
-        <input type='text' name='inputBody' />
-        <input type='submit' value='Search' />
-      </form>
+      {/* inputBody is right */}
+      <SearchBar inputbody={inputBody} callback={setInputBody} />
       {books.map((book, index) => {
         return (
           <div
             className='resultBody'
-            style={{ border: '1px solid black', padding: '10px' }}
+            style={{
+              border: '1px solid black',
+              margin: '5px 0',
+              padding: '10px',
+            }}
           >
             <div>
               {/* title */}
               <h3>{book.volumeInfo.title}</h3>
 
               <div style={{ display: 'flex' }}>
-                <img src={book.volumeInfo.imageLinks.thumbnail} alt='' />
+                {book.volumeInfo.imageLinks ? (
+                  <img src={book.volumeInfo.imageLinks.thumbnail} alt='' />
+                ) : (
+                  <img
+                    src={logo}
+                    alt=''
+                    style={{ width: '128px', height: '224px' }}
+                  />
+                )}
 
                 <div className='cardContainer' style={{ margin: '20px' }}>
                   <div
@@ -60,6 +107,13 @@ export const BookList = () => {
           </div>
         );
       })}
+      <button
+        onClick={() => {
+          ShowMore();
+        }}
+      >
+        more
+      </button>
     </div>
   );
 };

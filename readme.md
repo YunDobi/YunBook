@@ -2,7 +2,7 @@
 React, Node.js, Express, MongoDB
 
 ### Introduction ###
-This is a book research application and especially, I used the Google Book API for show the result, and control the user with the Json Web Token(TWT) for the authorization. Currently I set in 30sec for the expire of the token, but avaiable to change the time. It is solo project that I build in full stack, and in the future, I will make a user book shelves to store their books they want.
+This is a book research application, and I used the Google Book API to show the result and control the user with the Json Web Token(TWT) for authorization. Currently, I set in 30sec for the expiration of the token, but available to change the time. It is a solo project that I build in full stack, and in the future, I will make user bookshelves to store the books they liked or save.
 
 ### ScreenShot ###
 
@@ -14,7 +14,7 @@ This is a book research application and especially, I used the Google Book API f
 
 
 ### How to use ###
-1. look up the .env.example file, and fill the API adress and Mongodb URL
+1. look up the .env.example file, and fill in the API address and Mongodb URL
 2. ```cd client``` and ```npm install```
 3. same as the server too. move the directory and ```npm install```
 4. come back to the main directory, and run ```npm start```

@@ -12,7 +12,10 @@ dotenv.config();
 
 const dbConnect = async () => {
   mongoose
-    .connect(process.env.DB_URL, { useNewUrlParser: false })
+    .connect(process.env.DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => {
       console.log('Successfully connected to MongoDB Atlas!');
     })
@@ -44,7 +47,6 @@ app.get('/', (req, res) => {
   //   .catch((error) => {
   //     console.error(error);
   //   });
-
   //--------------finding information from the query-------------
   // CreatingUser.find({
   //   email: 'lyc1353@gmail.com'

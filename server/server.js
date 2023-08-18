@@ -8,7 +8,7 @@ const CreatingUser = require('./Model/Users');
 
 const app = express();
 dotenv.config();
-const port = dotenv.PORT;
+const port = process.env.PORT;
 
 const dbConnect = async () => {
   mongoose

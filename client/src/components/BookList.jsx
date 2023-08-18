@@ -10,7 +10,7 @@ import { Logout } from '../services/auth.service';
 export const BookList = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [inputBody, setInputBody] = useState(state.inputBody);
+  const [inputBody, setInputBody] = useState(state.inputBody || null);
 
   const books = state.books;
 

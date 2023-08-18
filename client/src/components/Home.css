@@ -45,6 +45,9 @@
 .Login:hover {
   cursor: pointer;
 }
+.Logout:hover {
+  cursor: pointer;
+}
 
 .loginBody {
   border: 1px solid black;

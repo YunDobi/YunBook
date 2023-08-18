@@ -24,6 +24,7 @@ export const Header = ({ status, setStatus }) => {
 
   const LogoutHandler = () => {
     localStorage.removeItem('user');
+    window.location.reload()
     navigate("/")
   }
 

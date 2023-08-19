@@ -10,12 +10,12 @@ const cors = require('cors');
 const app = express();
 dotenv.config();
 const port = process.env.PORT;
-// const corsOptions = {
-//   origin: "https://yun-book.vercel.app"
-// };
+const corsOptions = {
+  origin: "https://yun-book.vercel.app"
+};
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://yun-book.vercel.app");
+  res.header("Access-Control-Allow-Origin", "yun-book.vercel.app");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -37,7 +37,7 @@ const dbConnect = async() => {
 
 dbConnect();
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extends: true, withCredentials: true }));
 app.use(express.json());
 app.use('/api', APIRouter);

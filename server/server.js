@@ -10,12 +10,17 @@ const cors = require('cors');
 const app = express();
 dotenv.config();
 const port = process.env.PORT;
-const corsOptions = {
-  origin: "https://yun-book.vercel.app/"
-};
+// const corsOptions = {
+//   origin: "https://yun-book.vercel.app"
+// };
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://yun-book.vercel.app");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
-const dbConnect = async () => {
+const dbConnect = async() => {
   mongoose
     .connect(process.env.DB_URL, {
       useNewUrlParser: true,

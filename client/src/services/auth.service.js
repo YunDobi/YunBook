@@ -2,14 +2,14 @@ import axios from 'axios';
 
 
 const Register = (email, password) => {
-  return axios.post('/api/users/register', {
+  return axios.post('https://yun-book.onrender.com/api/users/register', {
     email: email,
     password: password,
   });
 }
 
 export const Login = (email, password) => {
-  return axios.post('/api/users/login', {
+  return axios.post('https://yun-book.onrender.com/api/users/login', {
     email: email,
     password: password,
   }).then((response) => {

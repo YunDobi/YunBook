@@ -13,9 +13,9 @@ export const SearchBar = ({inputbody, callback}) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('/api/books', { 
-        query: `${inputbody.value}`}
-      );
+      const res = await axios.post('https://yun-book.onrender.com/api/books', { 
+          query: `${inputbody.value}`
+        });
       const data = await res.data;
       console.log({ data });
       // setBooks(data.items);

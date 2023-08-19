@@ -38,6 +38,10 @@ const dbConnect = async() => {
 dbConnect();
 
 app.use(cors(corsOptions));
+app.use(cors({
+  origin: "*",
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+}));
 app.use(express.urlencoded({ extends: true, withCredentials: true }));
 app.use(express.json());
 app.use('/api', APIRouter);

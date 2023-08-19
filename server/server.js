@@ -37,7 +37,7 @@ const dbConnect = async() => {
 
 dbConnect();
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(express.urlencoded({ extends: true, withCredentials: true }));
 app.use(express.json());
 app.use('/api', APIRouter);

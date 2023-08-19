@@ -11,7 +11,7 @@ const app = express();
 dotenv.config();
 const port = process.env.PORT;
 const corsOptions = {
-  origin: "*"
+  origin: "https://yun-book.vercel.app/"
 };
 
 
@@ -32,7 +32,7 @@ const dbConnect = async () => {
 
 dbConnect();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extends: true, withCredentials: true }));
 app.use(express.json());
 app.use('/api', APIRouter);

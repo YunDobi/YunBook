@@ -11,11 +11,11 @@ const app = express();
 dotenv.config();
 const port = process.env.PORT;
 const corsOptions = {
-  origin: "https://yun-book.vercel.app"
+  origin: "*"
 };
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "yun-book.vercel.app");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });

@@ -5,10 +5,15 @@ const APIRouter = require('./Routers/index');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const CreatingUser = require('./Model/Users');
+const cors = require('cors');
 
 const app = express();
 dotenv.config();
 const port = process.env.PORT;
+const corsOptions = {
+  origin: "*"
+};
+
 
 const dbConnect = async () => {
   mongoose
@@ -27,11 +32,13 @@ const dbConnect = async () => {
 
 dbConnect();
 
-app.use(express.urlencoded({ extends: true }));
+app.use(cors(corsOptions));
+app.use(express.urlencoded({ extends: true, withCredentials: true }));
 app.use(express.json());
 app.use('/api', APIRouter);
 
 app.get('/', (req, res) => {
+  res.send("hello");
   //---------creating the new user-------------
   // let userInfo = new CreatingUser({
   //   email: 'testing@gmail.com',

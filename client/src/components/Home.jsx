@@ -9,7 +9,8 @@ import { SearchBar } from '../services/Helper';
 
 export const Home = () => {
   const [login, setLogin] = useState(false);
-  const [inputBody, setInputBody] = useState('');
+  const [loading, setLoading] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,13 +20,16 @@ export const Home = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     // console.log(typeof user.token, user.token);
     if (user) {
+      setLoading(true)
+      console.log("loading")
       try {
         axios
           .get('/api/auth', {
             headers: { authorization: 'Bearer ' + user.token },
           })
           .then((status) => {
-            console.log('axios work', status);
+            setLoading(false)
+            console.log('loading is done', status);
           })
           .catch((error) => {
             console.log('error in axios');
@@ -51,11 +55,7 @@ export const Home = () => {
         <div className='bodyTop'>
           <div className='bodySearch'>
             <h2>Search your book now!</h2>
-            {/* <form method='get' onSubmit={ReqHandler} style={{ margin: '20px' }}>
-              <input type='text' name='inputBody' onChange={handleChange} />
-              <input type='submit' value='Search' />
-            </form> */}
-            <SearchBar inputbody={inputBody} callback={setInputBody} />
+            <SearchBar searchQuery={searchQuery} callback={setSearchQuery} />
           </div>
         </div>
         <div>

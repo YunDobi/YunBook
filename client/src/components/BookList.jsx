@@ -3,9 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { SearchBar } from '../services/Helper';
 import logo from '../imges/ybook-logo.png';
 import axios from 'axios';
-import { Logout } from '../services/auth.service';
 // import axios from 'axios';
-// let page = 0;
 
 export const BookList = () => {
   const { state } = useLocation();
@@ -21,17 +19,20 @@ export const BookList = () => {
     if (user) {
       try {
         axios
-          .get('/api/auth', {
+          .get('https://yun-book.onrender.com/api/auth', {
             headers: { authorization: 'Bearer ' + user.token },
           })
           .then((status) => {
             console.log('axios work', status);
           })
           .catch((error) => {
-            console.log('error during the axios');
             if (error.response.status === 403) {
               console.log('Not Authirized yet!', error);
-              navigate('/login')
+              window.localStorage.removeItem('user');
+              navigate('/login', {
+                state: { message: 'Your token is expired' },
+              });
+              window.location.reload();
             }
           });
         // setBooks(data.items);
@@ -39,8 +40,7 @@ export const BookList = () => {
         console.log('error of axios request', error);
       }
     } else {
-      console.log("1")
-      navigate('/login', {state: {message: "not login yet"}})
+      navigate('/login', { state: { message: 'not login yet' } });
       // alert("not login Yet!")
     }
   }, []);
@@ -53,7 +53,7 @@ export const BookList = () => {
     <div className='ResultContainer' style={{ margin: '30px' }}>
       <h3>result</h3>
       {/* inputBody is right */}
-      <SearchBar inputbody={inputBody} callback={setInputBody} />
+      <SearchBar searchQuery={inputBody} callback={setInputBody} />
       {books.map((book, index) => {
         return (
           <div
@@ -79,14 +79,18 @@ export const BookList = () => {
                   />
                 )}
 
-                <div className='cardContainer' style={{ margin: '20px' }}>
+                <div
+                  className='cardContainer'
+                  style={{ margin: '20px', overflow: 'hidden' }}
+                >
                   <div
                     className='AuthLink'
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
                       justifyContent: 'space-between',
-                      width: '1200px',
+                      alignItems: 'center',
+                      width: '50vh',
                     }}
                   >
                     {/* author */}

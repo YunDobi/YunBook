@@ -2,7 +2,7 @@
 React, Node.js, Express, MongoDB
 
 ### Introduction ###
-This is a book research application, and I used the Google Book API to show the result and control the user with the Json Web Token(TWT) for authorization. Currently, I set in 30sec for the expiration of the token, but available to change the time. It is a solo project that I build in full stack, and in the future, I will make user bookshelves to store the books they liked or save.
+This is a book research application that I have been working on as a solo full stack project for the last few months. I used the Google Book API for showing the results, and I controlled the time limit and security with the Json Web Token(JWT) for the authorization and authentication. Currently the expiration of the token is set to 30 seconds for testing purposes, but it can be changed for the appropriate time range in the future for practical use.  Down the road, I will be making a user personalized book shelf for individuals to be able to store the books they mark as 'favourites', as well as setting up customizable user profiles so they can upload and share their bookshelves to the public. 
 
 ### ScreenShot ###
 

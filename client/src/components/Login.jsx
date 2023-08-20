@@ -18,15 +18,12 @@ export const Login = () => {
 
     try {
       setLoading(true);
+      console.log("loading")
 
-      // const requestion = axios.post('/api/users/login', {
-      //   email: email,
-      //   password: password,
-      // });
       LoginCall(email, password)
       .then((data) => {
         setLoading(false);
-        console.log('data', data);
+        console.log('loading done', data);
         // alert(data.data.message, 'moving to the home!');
         navigate('/');
         window.location.reload()
@@ -48,8 +45,8 @@ export const Login = () => {
         style={{ display: 'flex', flexDirection: 'column' }}
         onSubmit={submitLogin}
       >
-        <input type='text' name='email' />
-        <input type='text' name='password' />
+        <input type='email' name='email' />
+        <input type='password' name='password' />
         <br />
         <input type='submit' value='Login' />
       </form>

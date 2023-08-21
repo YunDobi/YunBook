@@ -16,15 +16,15 @@ export const Home = () => {
 
   // for checking the users and if res return 401, then delete the users.
   useEffect(() => {
-    // axios.defaults.headers.common['Authorization'] = `x_path ${localStorage.getItem('token')}`;
     const user = JSON.parse(localStorage.getItem('user'));
     // console.log(typeof user.token, user.token);
     if (user) {
       setLoading(true)
       console.log("loading")
       try {
+        //
         axios
-          .get('/api/auth', {
+          .get('https://yun-book.onrender.com/api/auth', {
             headers: { authorization: 'Bearer ' + user.token },
           })
           .then((status) => {

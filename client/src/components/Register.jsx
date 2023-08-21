@@ -46,7 +46,7 @@ export const Register = () => {
         onSubmit={RegisterSubmit}
       >
         <input type='text' name='email' />
-        <input type='text' name='password' />
+        <input type='password' name='password' />
         <input type='submit' value='Register' />
       </form>
       <p style={{ color: 'white' }}>

@@ -34,7 +34,7 @@ router.post('/login', (req, res) => {
             "Random Key",
             {
               //ms
-              expiresIn: '300000',
+              expiresIn: '60000',
             }
           );
           console.log(token);

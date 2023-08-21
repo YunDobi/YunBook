@@ -19,7 +19,7 @@ export const Register = () => {
 
     try {
       setLoading(true);
-      const requestion = axios.post('/api/users/register', {
+      const requestion = axios.post('https://yun-book.onrender.com/api/users/register', {
         email: email,
         password: password,
       });
